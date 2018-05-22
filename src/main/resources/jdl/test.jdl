@@ -1,0 +1,12 @@
+entity Car {
+    price BigDecimal ,
+    createdAt Long required
+}
+
+paginate Car with pagination
+
+dto * with mapstruct
+
+service all with serviceImpl
+
+angularSuffix * with mySuffix

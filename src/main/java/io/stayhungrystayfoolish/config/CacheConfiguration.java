@@ -43,6 +43,7 @@ public class CacheConfiguration {
             cm.createCache(io.stayhungrystayfoolish.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(io.stayhungrystayfoolish.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(io.stayhungrystayfoolish.domain.SocialUserConnection.class.getName(), jcacheConfiguration);
+            cm.createCache(io.stayhungrystayfoolish.domain.Car.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
