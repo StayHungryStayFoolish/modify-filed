@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Car.
+    -->
+    <changeSet id="20180522140355-1" author="jhipster">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="car"/>
+            </not>
+        </preConditions>
+        <createTable tableName="car">
+            <column name="id" type="varchar(36)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="price" type="decimal(32,16)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="createdAt" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+
+        <!--createAt 唯一索引 true-->
+        <createIndex indexName="UNI_CREATE_ID"
+                     tableName="car"
+                     unique="true">
+            <column name="createAt" type="bigint"/>
+        </createIndex>
+
+        <!--price 普通索引 false-->
+        <createIndex indexName="IDX_USER_ID"
+                     tableName="car"
+                     unique="false">
+            <column name="price" type="decimal(32,16)"/>
+        </createIndex>
+
+        <!--price, createAt 唯一联合索引 true-->
+        <createIndex indexName="UNI_PRICE_CREATE"
+                     tableName="car"
+                     unique="true">
+            <column name="price" type="decimal(32,16)"/>
+            <column name="createAt" type="long"/>
+        </createIndex>
+    </changeSet>
+
+
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>
